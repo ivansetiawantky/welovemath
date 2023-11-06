@@ -68,7 +68,9 @@ $ jupyter nbconvert 20200208_prob_sin2x.ipynb --to html --HTMLExporter.theme=dar
 * Because it is difficult to solve the `tcolorbox.sty` problem, so first we convert the ipynb to \LaTeX.
 
 ```bash
-$ jupyter nbconvert 20200208_prob_sin2x.ipynb --to=latex --TemplateExporter.exclude_input=True --template=../../latex-tplx/ivans_style_jupyter.tplx --output="mytest"
+#? $ jupyter nbconvert 20200208_prob_sin2x.ipynb --to=latex --TemplateExporter.exclude_input=True --template=../../latex-tplx/ivans_style_jupyter.tplx --output="mytest"
+#? Above is bad, because ivans_style_jupyter.tplx is NOT considered at all...
+$ jupyter nbconvert 20200208_prob_sin2x.ipynb --to=latex --TemplateExporter.exclude_input=True --output="mytest"
 ```
 
 * Then finally, use \LaTeX container (vscode devcontainer) to compile the \TeX file.
@@ -105,7 +107,10 @@ $ jupyter nbconvert 20200208_prob_sin2x.ipynb --to=pdf --TemplateExporter.exclud
 ```bash
 $ pwd
 ~/welovemath/misc/testjpfont
-$ rm -rf output-dir; jupyter nbconvert testjpfont.ipynb --to=latex --TemplateExporter.exclude_input=True --template=../../latex-tplx/ivans_jsarticle.tplx --output-dir=output-dir
+#? $ rm -rf output-dir; jupyter nbconvert testjpfont.ipynb --to=latex --TemplateExporter.exclude_input=True --template=../../latex-tplx/ivans_jsarticle.tplx --output-dir=output-dir
+#? Above is bad, because ivans_style_jupyter.tplx is NOT considered at all...
+$ rm -rf output-dir; jupyter nbconvert testjpfont.ipynb --to=latex --TemplateExporter.exclude_input=True --output-dir=output-dir
+
 #? $ cd output-dir
 #? $ ptex2pdf -u -l -ot "-shell-escape" testjpfont.tex
 #? $ ptex2pdf -u -l -ot "-shell-escape" testjpfont.tex
