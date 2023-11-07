@@ -84,7 +84,7 @@ $ docker run --rm --name latex-template-ja -it -v ${PWD}:/workdir ghcr.io/being2
 # lualatex mytest.tex (Run more than 2 times to get reference number correct)
 ```
 
-* In case the header of the tex file is `\documentclass{jsarticle}`, then use `uplatex` which is called by `latexmk`
+* In case the header of the tex file is `\documentclass{jsarticle}` OR `\documentclass[xelatex,ja=standard]{bxjsarticle}`, then use `xelatex`.
 
 ```bash
 $ cd /path/to/texfile_directory
