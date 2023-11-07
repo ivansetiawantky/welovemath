@@ -62,6 +62,36 @@ $ jupyter nbconvert 20200208_prob_sin2x.ipynb --to html --HTMLExporter.theme=dar
 
 * `vi /home/username/pyvenvs/welovemathnb/share/jupyter/nbconvert/templates/latex/index.tex.j2`
 * Change `\documentclass[11pt]{article}` to `\documentclass[xelatex,ja=standard]{bxjsarticle}`.
+* Also append below, in order to enable replacement of notebook's latex_metadata:
+
+```
+((* block title -*))
+((*- if nb.metadata.get("latex_metadata", {}).get("title", ""): -*))
+\title{((( nb.metadata["latex_metadata"]["title"] )))}
+((*- else -*))
+((*- set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] -*))
+\title{((( nb_title | escape_latex )))}
+((*- endif *))
+((*- endblock title *))
+
+((* block date *))
+((* if nb.metadata["date"]: *))
+\date{((( nb.metadata["date"] )))}
+((* endif *))
+((* endblock date *))
+
+((* block author *))
+((*- if nb.metadata.get("latex_metadata", {}).get("author", ""): -*))
+\author{((( nb.metadata["latex_metadata"]["author"] )))}
+((*- else -*))
+    ((* if 'authors' in nb.metadata *))
+    \author{((( nb.metadata.authors | join(', ', attribute='name') )))}
+    ((* else *))
+    \author{Author Fullname}
+    ((* endif *))
+((*- endif *))
+((* endblock author *))
+```
 
 ## Output to \TeX file
 
